@@ -4,6 +4,16 @@ import './shop.sass';
 import Grid from './components/Grid'
 
 function App() {
+  const db = {
+    items: [
+      { id: 1, title: 'Cat Tee T-Shirt', price: 110, size: 'm', img: "/img/img1.jpg" },
+      { id: 2, title: 'Cat Black T-Shirt', price: 110, size: 'l', img: "/img/img2.jpg" },
+      { id: 3, title: 'Cat Tee Black D-Shirt', price: 110, size: 's', img: "/img/img3.jpg" },
+      { id: 4, title: 'Cat Tee W-Shirt', price: 110, size: 'xs', img: "/img/img4.jpg" }
+    ],
+    addedItems: [],
+    total: 0
+  }
 
   const [isCartOpen, setCartOpen] = useState(false);
 
@@ -50,7 +60,7 @@ function App() {
 
       <div className="filter">
         <div className="filter__left">
-          <p>16 Product(s) found.</p>
+          <p>{db.items.length} Product(s) found.</p>
         </div>
         <div className="sort">
           <span>Order by</span>
@@ -62,7 +72,7 @@ function App() {
         </div>
       </div>
 
-      <Grid />
+      <Grid data={db} />
 
     </div>
   );
