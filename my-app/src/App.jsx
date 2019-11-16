@@ -1,15 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import './shop.sass';
-import Card from './components/card'
+import Grid from './components/Grid'
 
 function App() {
+
+  const [isCartOpen, setCartOpen] = useState(false);
+
+  const cartOpen = () => {
+    setCartOpen(true);
+  }
+
+  const cartClose = () => {
+    setCartOpen(false);
+  }
+
+  const cartClass = () => {
+    return isCartOpen === true ? 'active' : '';
+  }
+
   return (
     <div className="App">
 
-      <div className="cart">
-        <div className="cart__quantity">28</div>
+      <div className={`cart ${cartClass()}`}>
+        <div className="cart__btn" onClick={() => cartOpen()}>
+          <div className="cart__quantity">28</div>
+        </div>
+        <div className="cart__close" onClick={() => cartClose()}></div>
+
+        <div className="cart-items">
+          <div className="cart-item">
+
+            <div className="cart-item__left">
+              <div className="cart-item__img">
+                <img src="" alt=""/>
+              </div>
+              <div className="cart-item__info">
+                <div className="cart-item__title">Title</div>
+                <div className="cart-item__quantity">Quantity: 1</div>
+              </div>
+            </div>
+
+            <div className="cart-item__right">
+              <div className="cart__close"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="filter">
@@ -26,21 +62,8 @@ function App() {
         </div>
       </div>
 
-      <div className="grid">
+      <Grid />
 
-        <Card
-          imgUrl={"/img/img1.jpg"}
-          title={"Cat Tee Black T-Shirt"}
-          price={"10.90"}
-        />
-
-        <Card
-          imgUrl={"/img/img2.jpg"}
-          title={"Cat Tee Black T-Shirt"}
-          price={"12.00"}
-        />
-
-      </div>
     </div>
   );
 }

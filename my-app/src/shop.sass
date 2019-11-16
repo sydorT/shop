@@ -36,13 +36,30 @@
 
 .cart
   position: fixed
-  width: 60px
-  height: 60px
   top: 0
-  right: 0
-  background: #000000 url('/img/cart.svg') center no-repeat
-  background-size: 70%
-  cursor: pointer
+  right: -450px
+  width: 450px
+  height: 100%
+  background-color: #000000
+  transition: 0.3s
+  &__close
+    position: absolute
+    top: 7px
+    left: 7px
+    background: #000000 url('/img/close.svg') center no-repeat
+    background-size: 100%
+    width: 30px
+    height: 30px
+    cursor: pointer
+  &__btn
+    position: fixed
+    width: 60px
+    height: 60px
+    top: 0
+    right: 0
+    background: #000000 url('/img/cart.svg') center no-repeat
+    background-size: 70%
+    cursor: pointer
   &__quantity
     position: absolute
     bottom: 8px
@@ -56,6 +73,12 @@
     background-color: #EABF00
     font-size: 12px
     font-weight: bold
+  &.active
+    right: 0
+    .cart__btn
+      position: absolute
+      left: 50%
+      transform: translateX(-50%)
 
 .filter
   display: flex
@@ -71,3 +94,18 @@
     font-size: 16px
     &:focus
       outline: 0
+
+.cart-items
+  margin-top: 70px
+
+.cart-item
+  position: relative
+  padding: 10px 20px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  border-top: 2px solid blue
+  color: #ffffff
+  .cart__close
+    left: auto
+    right: 15px
