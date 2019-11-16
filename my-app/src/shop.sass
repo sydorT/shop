@@ -1,12 +1,18 @@
 .grid
   display: flex
   flex-wrap: wrap
-  width: 80%
   margin: 0 auto
   &-item
+    padding: 0 15px
     width: 24%
     margin-bottom: 1.333333%
-    border: 1px solid #000000
+    border: 1px solid transparent
+    text-align: center
+    cursor: pointer
+    &:hover
+      border: 1px solid #cccccc
+      button
+        background-color: orange
     &:not(:nth-child(4n))
       margin-right: 1.333333%
     &__img
@@ -17,3 +23,51 @@
       padding: 0 15px
     &__price
       font-size: 18px
+    &__btn
+      margin: 15px 0
+      button
+        width: 100%
+        padding: 10px 5px
+        background-color: #ffffff
+        border: 1px solid #000000
+        border-radius: 3px
+        cursor: pointer
+        font-size: 20px
+
+.cart
+  position: fixed
+  width: 60px
+  height: 60px
+  top: 0
+  right: 0
+  background: #000000 url('/img/cart.svg') center no-repeat
+  background-size: 70%
+  cursor: pointer
+  &__quantity
+    position: absolute
+    bottom: 8px
+    right: 7px
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: #EABF00
+    font-size: 12px
+    font-weight: bold
+
+.filter
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin: 60px 0 5px
+
+.sort
+  span
+    margin-right: 15px
+  select
+    padding: 5px 2px
+    font-size: 16px
+    &:focus
+      outline: 0
