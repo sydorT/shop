@@ -6,10 +6,10 @@ import Grid from './components/Grid'
 function App() {
   const db = {
     products: [
-      { id: 1, title: 'Cat Tee T-Shirt', price: 110, size: 'm', img: "/img/img1.jpg" },
-      { id: 2, title: 'Cat Black T-Shirt', price: 110, size: 'l', img: "/img/img2.jpg" },
-      { id: 3, title: 'Cat Tee Black D-Shirt', price: 110, size: 's', img: "/img/img3.jpg" },
-      { id: 4, title: 'Cat Tee W-Shirt', price: 110, size: 'xs', img: "/img/img4.jpg" }
+      { id: 1, title: 'Cat Tee T-Shirt', price: '11.90', size: 'M', img: "/img/img1.jpg" },
+      { id: 2, title: 'Cat Black T-Shirt', price: '15.00', size: 'L', img: "/img/img2.jpg" },
+      { id: 3, title: 'Cat Tee Black D-Shirt', price: '19.40', size: 'S', img: "/img/img3.jpg" },
+      { id: 4, title: 'Cat Tee W-Shirt', price: '24.80', size: 'XS', img: "/img/img4.jpg" }
     ]
   }
 
@@ -26,6 +26,11 @@ function App() {
 
   const cartClass = () => {
     return isCartOpen === true ? 'active' : '';
+  }
+
+  const removeProductFromCart = (item) => {
+    const filteredProducts = productsInCart.filter(value => value !== item);
+    setProductsInCart(filteredProducts);
   }
 
   return (
@@ -49,12 +54,18 @@ function App() {
                   </div>
                   <div className="cart-item__info">
                     <div className="cart-item__title">{item.title}</div>
+                    <div className="cart-item__size">{item.size}</div>
                     <div className="cart-item__quantity">Quantity: 1</div>
                   </div>
                 </div>
 
                 <div className="cart-item__right">
-                  <div className="cart__close"></div>
+                  <div className="cart__close" onClick={() => removeProductFromCart(item)}></div>
+                  <div className="cart-item__price">$ {item.price}</div>
+                  <div className="cart-item__controls">
+                    <div className="control-btn">-</div>
+                    <div className="control-btn">+</div>
+                  </div>
                 </div>
               </div>
             )

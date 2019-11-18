@@ -40,7 +40,7 @@
   right: -450px
   width: 450px
   height: 100%
-  background-color: #000000
+  background-color: #2F2D38
   transition: 0.3s
   &__close
     position: absolute
@@ -97,6 +97,8 @@
 
 .cart-items
   margin-top: 70px
+  overflow: auto
+  height: calc(100% - 70px)
 
 .cart-item
   position: relative
@@ -109,3 +111,32 @@
   .cart__close
     left: auto
     right: 15px
+  &__left
+    display: flex
+    align-items: center
+  &__right
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+  &__img
+    width: 100px
+    margin-right: 10px
+    img
+      width: 100%
+  &__controls
+    display: flex
+    .control-btn
+      width: 30px
+      height: 30px
+      background-color: #000000
+      display: flex
+      align-items: center
+      justify-content: center
+      padding-bottom: 4px
+      cursor: pointer
+  &__price
+    margin: 15px 0
+    color: #eabf00
+  &__size,
+  &__quantity
+    color: #5b5a5e

@@ -4,7 +4,6 @@ function Grid(props) {
 
   const addToCart = (item) => {
     props.setProductsInCart([...props.productsInCart, item]);
-    console.log(props.productsInCart);
   }
 
   return (
