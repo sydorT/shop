@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Grid(props) {
 
-  const [array, setArray] = useState([]);
-
-  const addToCart = () => {
-
+  const addToCart = (item) => {
+    props.setProductsInCart([...props.productsInCart, item]);
+    console.log(props.productsInCart);
   }
 
   return (
     <div className="grid">
 
-      {props.data.items.map((item, index) => {
+      {props.data.products.map((item, index) => {
         return (
-          <div key={index} className="grid-item" onClick={() => addToCart()}>
+          <div key={index} className="grid-item" onClick={() => addToCart(item)}>
             <div className="grid-item__img">
               <img src={item.img} alt="" />
             </div>
