@@ -33,6 +33,18 @@ function App() {
     setProductsInCart(filteredProducts);
   }
 
+  const increaseQuantity = (item) => {
+    const updatedProducts = productsInCart.map((value) => {
+      if (value.id === item.id) {
+        return { ...value, quantity: (value.quantity || 1) + 1 };
+      } else {
+        return value;
+      }
+    });
+    setProductsInCart(updatedProducts);
+    console.log(updatedProducts);
+  }
+
   return (
     <div className="App">
 
@@ -55,7 +67,7 @@ function App() {
                   <div className="cart-item__info">
                     <div className="cart-item__title">{item.title}</div>
                     <div className="cart-item__size">{item.size}</div>
-                    <div className="cart-item__quantity">Quantity: 1</div>
+                    <div className="cart-item__quantity">Quantity: {item.quantity > 1 ? item.quantity : '1'}</div>
                   </div>
                 </div>
 
@@ -64,7 +76,7 @@ function App() {
                   <div className="cart-item__price">$ {item.price}</div>
                   <div className="cart-item__controls">
                     <div className="control-btn">-</div>
-                    <div className="control-btn">+</div>
+                    <div className="control-btn" onClick={() => increaseQuantity(item)}>+</div>
                   </div>
                 </div>
               </div>
