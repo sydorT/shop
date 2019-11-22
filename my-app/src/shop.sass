@@ -85,6 +85,24 @@
   justify-content: space-between
   align-items: center
   margin: 60px 0 5px
+  &__size
+    display: flex
+    &-item
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 40px
+      height: 40px
+      border-radius: 50%
+      background-color: #ECECEC
+      margin: 0 5px
+      cursor: pointer
+      transition: 0.2s
+      &:hover
+        border: 1px solid #2F2D38
+      &.active
+        background-color: #2F2D38
+        color: #ffffff
 
 .sort
   span

@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import './App.css';
 import './shop.sass';
 import Grid from './components/Grid'
+import Filter from './components/Filter'
 
 function App() {
   const db = {
     products: [
-      { id: 1, title: 'Cat Tee T-Shirt', price: '11.90', size: 'M', img: "/img/img1.jpg" },
-      { id: 2, title: 'Cat Black T-Shirt', price: '15.00', size: 'L', img: "/img/img2.jpg" },
+      { id: 1, title: 'Cat Tee T-Shirt', price: '15.00', size: 'M', img: "/img/img1.jpg" },
+      { id: 2, title: 'Cat Black T-Shirt', price: '11.90', size: 'L', img: "/img/img2.jpg" },
       { id: 3, title: 'Cat Tee Black D-Shirt', price: '19.40', size: 'S', img: "/img/img3.jpg" },
-      { id: 4, title: 'Cat Tee W-Shirt', price: '24.80', size: 'XS', img: "/img/img4.jpg" }
+      { id: 4, title: 'Cat Tee W-Shirt', price: '24.80', size: 'L', img: "/img/img4.jpg" }
     ]
   }
 
   const [productsInCart, setProductsInCart] = useState([]);
   const [isCartOpen, setCartOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('select');
+  const [selectedSize, setSelectedSize] = useState([]);
 
   const cartOpen = () => {
     setCartOpen(true);
@@ -42,7 +45,17 @@ function App() {
       }
     });
     setProductsInCart(updatedProducts);
-    console.log(updatedProducts);
+  }
+
+  const decreaseQuantity = (item) => {
+    const updatedProducts = productsInCart.map((value) => {
+      if (value.id === item.id) {
+        return { ...value, quantity: (value.quantity || 1) - 1 };
+      } else {
+        return value;
+      }
+    });
+    setProductsInCart(updatedProducts);
   }
 
   return (
@@ -75,7 +88,7 @@ function App() {
                   <div className="cart__close" onClick={() => removeProductFromCart(item)}></div>
                   <div className="cart-item__price">$ {item.price}</div>
                   <div className="cart-item__controls">
-                    <div className="control-btn">-</div>
+                    <div className="control-btn" onClick={() => decreaseQuantity(item)}>-</div>
                     <div className="control-btn" onClick={() => increaseQuantity(item)}>+</div>
                   </div>
                 </div>
@@ -86,21 +99,17 @@ function App() {
         </div>
       </div>
 
-      <div className="filter">
-        <div className="filter__left">
-          <p>{db.products.length} Product(s) found.</p>
-        </div>
-        <div className="sort">
-          <span>Order by</span>
-          <select>
-            <option value="">Select</option>
-            <option value="">Lowest to highest</option>
-            <option value="">Highest to lowest</option>
-          </select>
-        </div>
-      </div>
+      <Filter data={db}
+        setSelectedOption={setSelectedOption}
+        selectedSize={selectedSize}
+        setSelectedSize={setSelectedSize}
+      />
 
-      <Grid data={db} productsInCart={productsInCart} setProductsInCart={setProductsInCart} />
+      <Grid data={db}
+        productsInCart={productsInCart}
+        setProductsInCart={setProductsInCart}
+        selectedOption={selectedOption}
+      />
 
     </div>
   );
