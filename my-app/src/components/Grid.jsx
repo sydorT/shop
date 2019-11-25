@@ -3,10 +3,26 @@ import React from 'react';
 function Grid(props) {
 
   const addToCart = (item) => {
-    props.setProductsInCart([...props.productsInCart, item]);
+    const isExist = props.productsInCart.some(i => i.id === item.id);
+    if (isExist) {
+      increaseQuantity(item);
+    } else {
+      props.setProductsInCart([...props.productsInCart, item]);
+    }
   }
 
-  const productsFiltered = () => {
+  const increaseQuantity = (item) => {
+    const updatedProducts = props.productsInCart.map((value) => {
+      if (value.id === item.id) {
+        return { ...value, quantity: (value.quantity || 1) + 1 };
+      } else {
+        return value;
+      }
+    });
+    props.setProductsInCart(updatedProducts);
+  }
+
+  const productsSort = () => {
     if (props.selectedOption === 'select') {
       return props.data.products;
     }
@@ -24,7 +40,7 @@ function Grid(props) {
   return (
     <div className="grid">
 
-      {productsFiltered().map((item, index) => {
+      {productsSort().map((item, index) => {
         return (
           <div key={index} className="grid-item" onClick={() => addToCart(item)}>
             <div className="grid-item__img">
