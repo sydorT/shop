@@ -22,25 +22,10 @@ function Grid(props) {
     props.setProductsInCart(updatedProducts);
   }
 
-  const productsSort = () => {
-    if (props.selectedOption === 'select') {
-      return props.data.products;
-    }
-    else if (props.selectedOption === 'lowest') {
-      return props.data.products.sort((a, b) => {
-        return a.price - b.price;
-      });
-    } else if (props.selectedOption === 'highest') {
-      return props.data.products.sort((a, b) => {
-        return b.price - a.price;
-      });
-    }
-  }
-
   return (
     <div className="grid">
 
-      {productsSort().map((item, index) => {
+      {props.productsSort.map((item, index) => {
         return (
           <div key={index} className="grid-item" onClick={() => addToCart(item)}>
             <div className="grid-item__img">

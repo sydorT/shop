@@ -58,6 +58,32 @@ function App() {
     setProductsInCart(updatedProducts);
   }
 
+  const productsFiltered = () => {
+    if (selectedSize.length !== 0) {
+      return db.products.filter(item => {
+        const isExist = selectedSize.some(size => size === item.size);
+        return isExist && item;
+      });
+    } else {
+      return db.products;
+    }
+  }
+
+  const productsSort = () => {
+    if (selectedOption === 'select') {
+      return productsFiltered();
+    }
+    else if (selectedOption === 'lowest') {
+      return productsFiltered().sort((a, b) => {
+        return a.price - b.price;
+      });
+    } else if (selectedOption === 'highest') {
+      return productsFiltered().sort((a, b) => {
+        return b.price - a.price;
+      });
+    }
+  }
+
   return (
     <div className="App">
 
@@ -103,12 +129,15 @@ function App() {
         setSelectedOption={setSelectedOption}
         selectedSize={selectedSize}
         setSelectedSize={setSelectedSize}
+        productsSort={productsSort()}
       />
 
       <Grid data={db}
         productsInCart={productsInCart}
         setProductsInCart={setProductsInCart}
         selectedOption={selectedOption}
+        selectedSize={selectedSize}
+        productsSort={productsSort()}
       />
 
     </div>

@@ -18,11 +18,7 @@ function Filter(props) {
 
   const isSizeActive = (size) => {
     const isActiveSize = props.selectedSize.some(item => item === size);
-    if (isActiveSize) {
-      return 'active';
-    } else {
-      return '';
-    }
+    return isActiveSize ? 'active' : '';
   }
 
   const sizes = props.data.products.map((item) => {
@@ -34,7 +30,7 @@ function Filter(props) {
   return (
     <div className="filter">
       <div className="filter__left">
-        <p>{props.data.products.length} Product(s) found.</p>
+        <p>{props.productsSort.length} Product(s) found.</p>
       </div>
 
       <div className="filter__size">
